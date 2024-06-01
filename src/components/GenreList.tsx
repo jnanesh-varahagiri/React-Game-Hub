@@ -26,7 +26,7 @@ const GenreList = ({ onSelectedGenre, selectedGenre }: Props) => {
   if (isLoading) {
     return (
       <Stack spacing={"60px"}>
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((data, index) => (
+        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((index) => (
           <Skeleton key={"genreskel" + index} paddingY="10px" height="20px" />
         ))}
       </Stack>

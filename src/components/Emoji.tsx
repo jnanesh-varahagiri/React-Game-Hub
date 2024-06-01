@@ -1,4 +1,3 @@
-import React from "react";
 import bullseye from "../assets/bullseye-.png";
 import thumbsUp from "../assets/thumbsup.png";
 import thumbsDown from "../assets/thumbsdown.jpeg";
