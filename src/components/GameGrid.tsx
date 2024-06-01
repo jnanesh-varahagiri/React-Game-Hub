@@ -3,16 +3,15 @@ import useGames from "../hooks/useGames";
 import { GameCard } from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
-import { Genre } from "../hooks/useGenres";
-import { Platform } from "../hooks/usePlatforms";
+
+import { GameQuery } from "../App";
 
 interface Props {
-  selectedGenre: Genre | null;
-  selectedPlatform: Platform | null;
+  gameQuery: GameQuery;
   key: string;
 }
-const GameGrid = ({ selectedGenre, selectedPlatform }: Props) => {
-  const { data, error, isLoading } = useGames(selectedGenre, selectedPlatform);
+const GameGrid = ({ gameQuery }: Props) => {
+  const { data, error, isLoading } = useGames(gameQuery);
   console.log(isLoading);
 
   return (
@@ -29,13 +28,14 @@ const GameGrid = ({ selectedGenre, selectedPlatform }: Props) => {
               <GameCardSkeleton />
             </GameCardContainer>
           ))}
-        {data.map((game, index) => {
-          return (
-            <GameCardContainer key={"game" + index}>
-              <GameCard game={game}></GameCard>
-            </GameCardContainer>
-          );
-        })}
+        {!isLoading &&
+          data.map((game, index) => {
+            return (
+              <GameCardContainer key={"game" + index}>
+                <GameCard game={game}></GameCard>
+              </GameCardContainer>
+            );
+          })}
       </SimpleGrid>
     </>
   );
