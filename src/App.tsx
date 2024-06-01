@@ -11,6 +11,7 @@ export interface GameQuery {
   genre: Genre | null;
   platform: Platform | null;
   sortOrder: string;
+  search: string | null;
 }
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
     genre: null,
     platform: null,
     sortOrder: "",
+    search: null,
   });
 
   function handleSelectedGenre(genre: Genre) {
@@ -37,6 +39,11 @@ function App() {
       return { ...prev, sortOrder: order };
     });
   }
+  function handleSearch(search: string) {
+    setGameQuery((prev) => {
+      return { ...prev, search: search };
+    });
+  }
   return (
     <>
       <Grid
@@ -50,7 +57,7 @@ function App() {
         }}
       >
         <GridItem area="nav">
-          <NavBar />
+          <NavBar onSearch={handleSearch} />
         </GridItem>
         <Show above="lg">
           <GridItem paddingX={5} area="aside">
