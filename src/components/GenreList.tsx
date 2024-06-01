@@ -6,6 +6,7 @@ import {
   Stack,
   Skeleton,
   Button,
+  Heading,
 } from "@chakra-ui/react";
 import { Genre, useGenres } from "../hooks/useGenres";
 import { getCroppedImageUrl } from "../Services/Image-url";
@@ -32,30 +33,38 @@ const GenreList = ({ onSelectedGenre, selectedGenre }: Props) => {
     );
   }
   return (
-    <List>
-      {data.map((genre) => (
-        <ListItem key={genre.id + "genre"} paddingY="10px">
-          <HStack>
-            <Image
-              boxSize={"32px"}
-              borderRadius={8}
-              src={getCroppedImageUrl(genre.image_background)}
-            />
-            <Button
-              fontWeight={genre.id === selectedGenre?.id ? "bold" : undefined}
-              colorScheme={
-                genre.id === selectedGenre?.id ? "purple" : undefined
-              }
-              variant="link"
-              fontSize={"larger"}
-              onClick={() => onSelectedGenre(genre)}
-            >
-              {genre.name}
-            </Button>
-          </HStack>
-        </ListItem>
-      ))}
-    </List>
+    <>
+      <Heading fontSize={"2xl"} marginBottom={3}>
+        Genres
+      </Heading>
+      <List>
+        {data.map((genre) => (
+          <ListItem key={genre.id + "genre"} paddingY="10px">
+            <HStack>
+              <Image
+                boxSize={"32px"}
+                borderRadius={8}
+                objectFit={"cover"}
+                src={getCroppedImageUrl(genre.image_background)}
+              />
+              <Button
+                whiteSpace={"wrap"}
+                textAlign={"left"}
+                fontWeight={genre.id === selectedGenre?.id ? "bold" : undefined}
+                colorScheme={
+                  genre.id === selectedGenre?.id ? "purple" : undefined
+                }
+                variant="link"
+                fontSize={"larger"}
+                onClick={() => onSelectedGenre(genre)}
+              >
+                {genre.name}
+              </Button>
+            </HStack>
+          </ListItem>
+        ))}
+      </List>
+    </>
   );
 };
 
