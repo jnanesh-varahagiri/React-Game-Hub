@@ -12,11 +12,11 @@ import { Genre, useGenres } from "../hooks/useGenres";
 import { getCroppedImageUrl } from "../Services/Image-url";
 
 interface Props {
-  selectedGenre: Genre | null;
-  onSelectedGenre: (genre: Genre) => void;
+  selectedGenreId?: number;
+  onSelectedGenre: (genreId: number) => void;
 }
 
-const GenreList = ({ onSelectedGenre, selectedGenre }: Props) => {
+const GenreList = ({ onSelectedGenre, selectedGenreId }: Props) => {
   const { data, isLoading, error } = useGenres();
 
   if (error) {
@@ -51,15 +51,13 @@ const GenreList = ({ onSelectedGenre, selectedGenre }: Props) => {
                 <Button
                   whiteSpace={"wrap"}
                   textAlign={"left"}
-                  fontWeight={
-                    genre.id === selectedGenre?.id ? "bold" : undefined
-                  }
+                  fontWeight={genre.id === selectedGenreId ? "bold" : undefined}
                   colorScheme={
-                    genre.id === selectedGenre?.id ? "purple" : undefined
+                    genre.id === selectedGenreId ? "purple" : undefined
                   }
                   variant="link"
                   fontSize={"larger"}
-                  onClick={() => onSelectedGenre(genre)}
+                  onClick={() => onSelectedGenre(genre.id)}
                 >
                   {genre.name}
                 </Button>

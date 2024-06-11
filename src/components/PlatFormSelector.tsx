@@ -7,15 +7,17 @@ import {
   MenuList,
 } from "@chakra-ui/react";
 import { BiChevronDown } from "react-icons/bi";
-import usePlatforms, { Platform } from "../hooks/usePlatforms";
+import usePlatforms from "../hooks/usePlatforms";
+import usePlatform from "../hooks/usePlatform";
 
 interface Props {
-  selectedPlatform: Platform | null;
-  onSelectPlatform: (selectedPlatforn: Platform) => void;
+  selectedPlatformId?: number;
+  onSelectPlatform: (selectedPlatformId: number) => void;
 }
 
-const PlatFormSelector = ({ onSelectPlatform, selectedPlatform }: Props) => {
+const PlatFormSelector = ({ onSelectPlatform, selectedPlatformId }: Props) => {
   const { data, error } = usePlatforms();
+  const Platform = usePlatform(selectedPlatformId ? selectedPlatformId : 0);
 
   if (error) {
     return null;
@@ -24,7 +26,7 @@ const PlatFormSelector = ({ onSelectPlatform, selectedPlatform }: Props) => {
     <Box>
       <Menu>
         <MenuButton px={4} py={2} as={Button} rightIcon={<BiChevronDown />}>
-          {selectedPlatform ? selectedPlatform.name : "Platforms"}
+          {selectedPlatformId ? Platform?.name : "Platforms"}
         </MenuButton>
         <MenuList>
           {data &&
@@ -32,7 +34,7 @@ const PlatFormSelector = ({ onSelectPlatform, selectedPlatform }: Props) => {
               return (
                 <MenuItem
                   key={"platformFilter" + menu.id}
-                  onClick={() => onSelectPlatform(menu)}
+                  onClick={() => onSelectPlatform(menu.id)}
                 >
                   {menu.name}
                 </MenuItem>
