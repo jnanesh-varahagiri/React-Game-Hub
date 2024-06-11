@@ -13,6 +13,7 @@ export interface GameQuery {
   platform: Platform | null;
   sortOrder: string;
   search: string | null;
+  pageParam: number;
 }
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
     platform: null,
     sortOrder: "",
     search: null,
+    pageParam: 1,
   });
 
   function handleSelectedGenre(genre: Genre) {

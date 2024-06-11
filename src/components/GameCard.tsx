@@ -10,6 +10,7 @@ interface Props {
   game: Game;
 }
 export const GameCard = ({ game }: Props) => {
+  console.log(game);
   return (
     <Card>
       <Image
